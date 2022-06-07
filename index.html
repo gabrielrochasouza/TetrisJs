@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tetris Game</title>
+    <style>
+        canvas{
+            margin: 50px auto 0;
+            border: 2px solid #fff;
+        }
+        body{
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+            background:linear-gradient(90deg,#111,#222) ;
+            color: white;
+        }
+        h2{
+            margin: 0;
+            padding: 0;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameBoard">
+    </canvas>
+    <h2>Pontuação: <span id="score">0</span> </h2>
+    <h2>Max Score: <span id="max-score">0</span> </h2>
+    <script src="src/constants.js"></script>
+    <script src="src/pieces.js"></script>
+    <script src="src/class-piece.js"></script>
+    <script src="src/functions.js"></script>
+    <script src="src/index.js"></script>
+</body>
+</html>
