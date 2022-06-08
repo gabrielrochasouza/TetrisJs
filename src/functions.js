@@ -4,13 +4,12 @@ const drawBoard = ()=>{
             drawSquare(currentCol,currentRow,BOARD[currentRow][currentCol])
         }
     }
-
 }
 
 const drawSquare = (x,y,color)=>{
     ctx.fillStyle = color
     ctx.fillRect(x*rectSize,y*rectSize,rectSize,rectSize)
-    ctx.strokeStyle = '#555'
+    ctx.strokeStyle = defaultStrokeColor
     ctx.strokeRect(x*rectSize,y*rectSize,rectSize,rectSize)
 
 }
@@ -35,6 +34,7 @@ const restartGame = ()=>{
     }
     setScore(0)
     drawBoard()
+    clearStroke()
 }
 
 
@@ -68,3 +68,22 @@ const startInterval = (speed)=>{
 const stopInterval = ()=>{
     clearInterval(interval)
 }
+
+
+const drawStroke = (x,y,color)=>{
+    ctx.strokeStyle = color
+    ctx.strokeRect(x*rectSize,y*rectSize,rectSize,rectSize)
+}
+
+const clearStroke = ()=>{
+    for(let currentRow=0; currentRow < numberOfSquaresY; currentRow++){
+        for(let currentCol=0; currentCol < numberOfSquaresX;currentCol++){
+            drawStroke(currentCol,currentRow,defaultStrokeColor)
+        }
+    }
+}
+
+const showStartGame = ()=>{
+
+}
+

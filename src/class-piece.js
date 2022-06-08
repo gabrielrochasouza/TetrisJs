@@ -30,17 +30,20 @@ class Piece {
 
     moveDown(){
         if(!this.collision()){
+            clearStroke()
             this.undrawPiece()
             this.y++
             this.drawPiece()
+            this.drawShadowPiece()
         }else{
+            
             this.verifyGameOver()
         }
     }
 
     moveLeft(){
         if(!this.collision()){
-           // this.undrawPiece()
+         
             let collison =false
             for(let currentRow=0; currentRow<this.activePiece.length ;currentRow++){
                 for(let currentCol=0; currentCol<this.activePiece.length ;currentCol++){
@@ -58,13 +61,14 @@ class Piece {
                 }
             }
             if(collison ==false) {
-            
+                clearStroke()
                 this.undrawPiece()
                 this.x--
                 this.drawPiece()
+                this.drawShadowPiece()
             
             }
-            //this.drawPiece()
+           
         }
     }
 
@@ -89,10 +93,11 @@ class Piece {
                 }
             }
             if(collison ==false){ 
-                
+                clearStroke()
                 this.undrawPiece()
                 this.x++
                 this.drawPiece()
+                this.drawShadowPiece()
             }
             //this.drawPiece()
         }
@@ -123,8 +128,10 @@ class Piece {
             }
         }
         if(collision ==false ){
+            clearStroke()
             this.pieceNumber = (this.pieceNumber + 1)% this.piece.length
             this.activePiece = this.piece[this.pieceNumber]
+            this.drawShadowPiece()
         }
         this.drawPiece()
 
@@ -137,6 +144,7 @@ class Piece {
                 if(this.activePiece[currentRow][currentCol]){
                     
                     if(this.y+currentRow === numberOfSquaresY-1){ //colisão com a borda inferior
+               
                         this.lockPieceInBoard()
                         return true
                     }
@@ -146,6 +154,7 @@ class Piece {
                         const currentBoardCell = BOARD[this.y+currentRow+1][this.x+currentCol]
                         
                         if(currentBoardCell!==defaultColor){
+         
                             this.lockPieceInBoard()
                             return true
                         }
@@ -171,8 +180,9 @@ class Piece {
         }
         score+=100
         setScore(score)
+        clearStroke()
         this.cleanLastRow()
-        //this.verifyGameOver()
+
     }
 
 
@@ -183,7 +193,9 @@ class Piece {
             restartGame()
             score = 0
             setScore(score)
-     
+            gamePaused = true
+            stopInterval()
+            startElement.classList.remove('hidden')
         }
     }
 
@@ -200,6 +212,8 @@ class Piece {
                 let newRow = Array(numberOfSquaresX).fill(defaultColor)
                 BOARD.splice(rowsFilled[i], 1)
                 BOARD.unshift(newRow)
+                score+=1000
+                setScore(score)
             }
             drawBoard()
         }
@@ -208,6 +222,67 @@ class Piece {
 
     moveDownFast(){
         speedInterval = 50
+    }
+
+    drawShadowPiece(){
+        let lastPositionY =this.getLastPositionY()
+        for(let currentRow=0; currentRow<this.activePiece.length ;currentRow++){
+            for(let currentCol=0; currentCol<this.activePiece.length ;currentCol++){
+                if(this.activePiece[currentRow][currentCol]){
+                    drawStroke(this.x+currentCol, lastPositionY + currentRow, shadowPieceColor)
+                }
+            }
+        }
+    }
+
+
+
+    getLastPositionY(){
+        
+
+        for(let y = 0; y < BOARD.length ;y++){
+            
+            for(let currentRow=0; currentRow<this.activePiece.length ;currentRow++){
+                for(let currentCol=0; currentCol<this.activePiece.length ;currentCol++){
+                    if(this.activePiece[currentRow][currentCol] && y+currentRow< BOARD.length){
+                        
+                        
+                        if(BOARD[y+currentRow][this.x+currentCol] !==defaultColor ){
+  
+                            return y -1
+
+                        }
+                        if(BOARD.length-1 === y + currentRow){
+
+                            return this.getLastPositionYReversed()
+                        }
+                    }
+                }
+            }
+
+        }
+
+    }
+
+    getLastPositionYReversed(){
+        for(let y = BOARD.length-1; y >= 0 ;y--){
+            let verifyArr = []
+            for(let currentRow=0; currentRow<this.activePiece.length ;currentRow++){
+                for(let currentCol=0; currentCol<this.activePiece.length ;currentCol++){
+                    if(this.activePiece[currentRow][currentCol] && y+currentRow< BOARD.length){
+                        
+                        if(BOARD[y+currentRow][this.x+currentCol] ===defaultColor ){
+                            verifyArr.push(defaultColor)
+                        }
+                    }
+                }
+            }
+             if(verifyArr.length === 4){
+                console.log(y)
+                 return y
+            }
+        }
+
     }
 
 

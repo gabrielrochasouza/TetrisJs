@@ -1,6 +1,7 @@
 
 const canvas = document.getElementById('gameBoard')
 const ctx = canvas.getContext('2d')
+const startElement = document.getElementById('start')
 
 const BOARD = []
 
@@ -14,8 +15,8 @@ canvas.height = boardHeight
 canvas.width = boardWidth
 
 const defaultColor = '#111'
+const defaultStrokeColor ='#222'
+const shadowPieceColor = '#fff'
 
 const scoreElement = document.getElementById('score')
 const maxScoreElement = document.getElementById('max-score')
-let score = 0
-let maxScore = Number(localStorage.getItem('@Max-score')) || 0

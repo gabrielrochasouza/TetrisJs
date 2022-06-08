@@ -7,7 +7,7 @@
     <title>Tetris Game</title>
     <style>
         canvas{
-            margin: 50px auto 0;
+            margin: 40px auto 0;
             border: 2px solid #fff;
         }
         body{
@@ -18,10 +18,26 @@
             background:linear-gradient(90deg,#111,#222) ;
             color: white;
         }
-        h2{
+        h2,p{
             margin: 0;
             padding: 0;
-            font-size: 20px;
+            font-size: 12px;
+        }
+        p{
+            font-size: 9px;
+            color: #eee;
+            animation: shiny 1s infinite alternate;
+        }
+        .hidden{
+            display: none;
+        }
+        @keyframes shiny {
+            from{
+                opacity: 0;
+            }
+            to{
+                opacity: 1;
+            }
         }
     </style>
 </head>
@@ -30,6 +46,7 @@
     </canvas>
     <h2>Pontuação: <span id="score">0</span> </h2>
     <h2>Max Score: <span id="max-score">0</span> </h2>
+    <p id="start">Aperte qualquer tecla para iniciar o game.</p>
     <script src="src/constants.js"></script>
     <script src="src/pieces.js"></script>
     <script src="src/class-piece.js"></script>
