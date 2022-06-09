@@ -35,10 +35,10 @@ class Piece {
             this.y++
             this.drawPiece()
             this.drawShadowPiece()
-        }else{
-            
-            this.verifyGameOver()
+           
+
         }
+        this.verifyGameOver()
     }
 
     moveLeft(){
@@ -178,6 +178,7 @@ class Piece {
                 }
             }
         }
+
         score+=100
         setScore(score)
         clearStroke()
@@ -240,7 +241,7 @@ class Piece {
     getLastPositionY(){
         
 
-        for(let y = 0; y < BOARD.length ;y++){
+        for(let y = this.y >= 0 ? this.y : 0; y < BOARD.length ;y++){
             
             for(let currentRow=0; currentRow<this.activePiece.length ;currentRow++){
                 for(let currentCol=0; currentCol<this.activePiece.length ;currentCol++){
@@ -278,7 +279,6 @@ class Piece {
                 }
             }
              if(verifyArr.length === 4){
-                console.log(y)
                  return y
             }
         }
