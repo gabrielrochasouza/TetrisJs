@@ -12,7 +12,7 @@ class Piece {
         for(let currentRow=0; currentRow<this.activePiece.length ;currentRow++){
             for(let currentCol=0; currentCol<this.activePiece.length ;currentCol++){
                 if(this.activePiece[currentRow][currentCol]){
-                    drawSquare(this.x+currentCol,this.y+currentRow,this.color)
+                    drawSquare(this.x+currentCol,this.y+currentRow,this.color,ctx)
                 }
             }
         }
@@ -22,7 +22,7 @@ class Piece {
         for(let currentRow=0; currentRow<this.activePiece.length ;currentRow++){
             for(let currentCol=0; currentCol<this.activePiece.length ;currentCol++){
                 if(this.activePiece[currentRow][currentCol]){
-                    drawSquare(this.x+currentCol,this.y+currentRow,defaultColor)
+                    drawSquare(this.x+currentCol,this.y+currentRow,defaultColor,ctx)
                 }
             }
         }

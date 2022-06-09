@@ -5,6 +5,7 @@ let gamePaused = true
 let score = 0
 let maxScore = Number(localStorage.getItem('@Max-score')) || 0
 
+getSelectedPieces()
 restartGame()
 
 let newPiece = generateNewPiece()
@@ -12,8 +13,9 @@ let newPiece = generateNewPiece()
 document.addEventListener('keydown',(e)=>{
     
     if(gamePaused){
-        startInterval(normalSpeedInterval)
         gamePaused =false
+        drawSecondSelectedPiece()
+        startInterval(normalSpeedInterval)
         startElement.classList.add('hidden')
     }
     switch(e.key){
@@ -25,7 +27,7 @@ document.addEventListener('keydown',(e)=>{
             break;
         case 'ArrowDown':
             stopInterval()
-            startInterval(fastSpeedInterval)
+            restartIntervalWithfastSpeed()
             break;
         case 'ArrowUp':
             newPiece.swap()
