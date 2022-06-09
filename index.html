@@ -8,8 +8,9 @@
     <title>Tetris Game</title>
     <style>
         canvas{
-            margin: 40px auto 0;
-            border: 2px solid #fff;
+            margin: 0px auto 0px;
+            position: absolute;
+            bottom: 0;
         }
         body{
             text-align: center;
@@ -32,6 +33,14 @@
         .hidden{
             display: none;
         }
+        .box{
+            margin: 40px 0 5px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            text-align: center;
+            justify-content: center;
+        }
         @keyframes shiny {
             from{
                 opacity: 0;
@@ -43,8 +52,10 @@
     </style>
 </head>
 <body>
-    <canvas id="gameBoard">
-    </canvas>
+    <div id="box" class="box">
+        <canvas id="gameBoard">
+        </canvas>
+    </div>
     <h2>Pontuação: <span id="score">0</span> </h2>
     <h2>Max Score: <span id="max-score">0</span> </h2>
     <p id="start">Aperte qualquer tecla para iniciar o game.</p>
