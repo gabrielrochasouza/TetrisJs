@@ -1,5 +1,5 @@
 let normalSpeedInterval = 500
-let maximumNormalSpeedInterval = 200
+let maximumNormalSpeedInterval = 100
 let fastSpeedInterval = 5
 let gamePaused = true
 
