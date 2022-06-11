@@ -20,8 +20,9 @@ const boardHeight = rectSize*numberOfSquaresY
 const boardWidth = rectSize*numberOfSquaresX
 
 const sideCanvasNumberOfSquaresX = 6
-const sideCanvasNumberOfSquaresY = 5
+const sideCanvasNumberOfSquaresY = 20
 
+const numberOfSidePieces = 4
 
 
 boxElement.style.height = rectSize*(numberOfSquaresY-1)+'px'
@@ -39,3 +40,5 @@ const shadowPieceColor = '#fff'
 
 const scoreElement = document.getElementById('score')
 const maxScoreElement = document.getElementById('max-score')
+const levelElement = document.getElementById('level')
+const velocityElement = document.getElementById('velocity')

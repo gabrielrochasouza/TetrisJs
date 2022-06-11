@@ -61,15 +61,16 @@ class Piece {
                 }
             }
             if(collison ==false) {
-                clearStroke()
                 this.undrawPiece()
                 this.x--
                 this.drawPiece()
+                clearStroke()
                 this.drawShadowPiece()
             
             }
            
         }
+   
     }
 
     moveRight(){
@@ -93,14 +94,15 @@ class Piece {
                 }
             }
             if(collison ==false){ 
-                clearStroke()
                 this.undrawPiece()
                 this.x++
                 this.drawPiece()
+                clearStroke()
                 this.drawShadowPiece()
             }
-            //this.drawPiece()
+           
         }
+        
     }
 
     swap(){
@@ -146,6 +148,7 @@ class Piece {
                     if(this.y+currentRow === numberOfSquaresY-1){ //colisão com a borda inferior
                
                         this.lockPieceInBoard()
+                       
                         return true
                     }
 
@@ -156,6 +159,7 @@ class Piece {
                         if(currentBoardCell!==defaultColor){
          
                             this.lockPieceInBoard()
+                            
                             return true
                         }
                     }
@@ -193,6 +197,8 @@ class Piece {
            
             restartGame()
             score = 0
+            level = 0
+            normalSpeedInterval = 500
             setScore(score)
             gamePaused = true
             stopInterval()

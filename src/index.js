@@ -1,8 +1,10 @@
-let normalSpeedInterval = 200
-let fastSpeedInterval = 10
+let normalSpeedInterval = 500
+let maximumNormalSpeedInterval = 200
+let fastSpeedInterval = 5
 let gamePaused = true
 
 let score = 0
+let level = 0
 let maxScore = Number(localStorage.getItem('@Max-score')) || 0
 
 getSelectedPieces()
@@ -14,6 +16,7 @@ document.addEventListener('keydown',(e)=>{
     
     if(gamePaused){
         gamePaused =false
+        setScore(0)
         drawSecondSelectedPiece()
         startInterval(normalSpeedInterval)
         startElement.classList.add('hidden')

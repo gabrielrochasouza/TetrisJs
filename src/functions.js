@@ -15,16 +15,20 @@ const drawSideCanvas = ()=>{
 }
 
 const drawSecondSelectedPiece = ()=>{
-    const pieceToBeDraw = piecesSelected[1][0][0]
-    const colorToBeDraw = piecesSelected[1][1]
-    
-    const spaceFromBorderX = 1
-    const spaceFromBorderY = 1
+    for(let i = 1; i < piecesSelected.length ;i++){
 
-    for(let currentRow=0; currentRow< pieceToBeDraw.length ;currentRow++){
-        for(let currentCol=0; currentCol<pieceToBeDraw.length ;currentCol++){
-            if(pieceToBeDraw[currentRow][currentCol]!==0){
-                drawSquare(currentCol+spaceFromBorderX, currentRow + spaceFromBorderY, colorToBeDraw, ctxSideCanvas)
+        const pieceToBeDraw = piecesSelected[i][0][0]
+        const colorToBeDraw = piecesSelected[i][1]
+        
+        const spaceFromBorderX = 1
+        const spaceBetweenPieces = i===0 ? 2 : 3
+        const spaceFromBorderY = 4 *(i-1) + spaceBetweenPieces
+        
+        for(let currentRow=0; currentRow< pieceToBeDraw.length ;currentRow++){
+            for(let currentCol=0; currentCol<pieceToBeDraw.length ;currentCol++){
+                if(pieceToBeDraw[currentRow][currentCol]!==0){
+                    drawSquare(currentCol+spaceFromBorderX, currentRow + spaceFromBorderY, colorToBeDraw, ctxSideCanvas)
+                }
             }
         }
     }
@@ -39,16 +43,21 @@ const drawSquareWithoutStroke = (x,y,color,ctx)=>{
 const drawSquare = (x,y,color,ctx)=>{
     ctx.fillStyle = color
     ctx.fillRect(x*rectSize,y*rectSize,rectSize,rectSize)
+    if(color !== defaultColor){
+        ctx.fillStyle = '#fff'
+        ctx.fillRect(x*rectSize+2,y*rectSize+2, 1, 5)
+        ctx.fillRect(x*rectSize+2,y*rectSize+2, 3, 1)
+    }
     ctx.strokeStyle = defaultStrokeColor
     ctx.strokeRect(x*rectSize,y*rectSize,rectSize,rectSize)
 
 }
 
 const getSelectedPieces = ()=>{
-    const randomNum1 = Math.floor(Math.random()*PIECES.length)
-    const randomNum2 = Math.floor(Math.random()*PIECES.length)
-    piecesSelected.push([PIECES[randomNum1], colors[randomNum1],randomNum1 ])
-    piecesSelected.push([PIECES[randomNum2], colors[randomNum2],randomNum2 ])
+    for(let i = 0; i < (1 + numberOfSidePieces); i++){
+        const randomNum = Math.floor(Math.random()*PIECES.length)
+        piecesSelected.push([PIECES[randomNum], colors[randomNum],randomNum])
+    }
 }
 
 const updateSelectedPieces = ()=>{
@@ -92,19 +101,26 @@ const restartGame = ()=>{
 
 const setScore = (score)=>{
     scoreElement.innerText = score
+    velocityElement.innerText = ' '+ normalSpeedInterval >300 ? '(velocidade lenta)' : normalSpeedInterval===maximumNormalSpeedInterval ? '(velocidade máxima)' : '(velocidade rápida)' 
+    if(score > level*10000){
+        level++
+        if(normalSpeedInterval > maximumNormalSpeedInterval) normalSpeedInterval-= 50
+    }
     if(score>maxScore){
         maxScore = score
         maxScoreElement.innerText = maxScore
         localStorage.setItem('@Max-score',maxScore)
     }else{
         maxScoreElement.innerText = maxScore
-
+        
     }
+    levelElement.innerText = level
 }
 
 let interval 
 
 const startInterval = (speed)=>{
+
     interval = setInterval(() => {
 
         newPiece.moveDown()
