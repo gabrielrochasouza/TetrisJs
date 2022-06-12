@@ -28,6 +28,16 @@ class Piece {
         }
     }
 
+    undrawShadowStroke(){
+        for(let currentRow=0; currentRow<this.activePiece.length ;currentRow++){
+            for(let currentCol=0; currentCol<this.activePiece.length ;currentCol++){
+                if(this.activePiece[currentRow][currentCol]){
+                    drawSquareWithDefaultStroke(this.x+currentCol,this.y_shadow+currentRow,ctx)
+                }
+            }
+        }
+    }
+
     moveDown(){
         if(!this.collision()){
             clearStroke()
@@ -62,9 +72,10 @@ class Piece {
             }
             if(collison ==false) {
                 this.undrawPiece()
+                clearStroke()
+                this.undrawShadowStroke()
                 this.x--
                 this.drawPiece()
-                clearStroke()
                 this.drawShadowPiece()
             
             }
@@ -95,9 +106,10 @@ class Piece {
             }
             if(collison ==false){ 
                 this.undrawPiece()
+                this.undrawShadowStroke()
+                clearStroke()
                 this.x++
                 this.drawPiece()
-                clearStroke()
                 this.drawShadowPiece()
             }
            
@@ -131,6 +143,7 @@ class Piece {
         }
         if(collision ==false ){
             clearStroke()
+            this.undrawShadowStroke()
             this.pieceNumber = (this.pieceNumber + 1)% this.piece.length
             this.activePiece = this.piece[this.pieceNumber]
             this.drawShadowPiece()
@@ -255,7 +268,7 @@ class Piece {
                         
                         
                         if(BOARD[y+currentRow][this.x+currentCol] !==defaultColor ){
-  
+                            this.y_shadow = y - 1
                             return y -1
 
                         }
@@ -285,6 +298,7 @@ class Piece {
                 }
             }
              if(verifyArr.length === 4){
+                this.y_shadow = y
                  return y
             }
         }

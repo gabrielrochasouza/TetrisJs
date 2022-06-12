@@ -61,6 +61,13 @@ const drawSquareWithoutStroke = (x, y, color, ctx) => {
   ctx.strokeRect(x * rectSize, y * rectSize, rectSize, rectSize);
 };
 
+drawSquareWithDefaultStroke = (x, y, ctx)=>{
+  ctx.fillStyle = defaultColor;
+  ctx.fillRect(x * rectSize, y * rectSize, rectSize, rectSize);
+  ctx.strokeStyle = defaultStrokeColor;
+  ctx.strokeRect(x * rectSize, y * rectSize, rectSize, rectSize);
+}
+
 const drawSquare = (x, y, color, ctx) => {
   ctx.fillStyle = color;
   ctx.fillRect(x * rectSize, y * rectSize, rectSize, rectSize);
